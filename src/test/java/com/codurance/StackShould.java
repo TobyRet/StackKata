@@ -1,6 +1,6 @@
 package com.codurance;
 
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.EmptyStackException;
@@ -13,15 +13,20 @@ public class StackShould {
     private static final Object SOME_OBJECT = "blah";
     private static final Object ANOTHER_OBJECT = "excetera";
 
+    Stack stack;
+
+    @Before
+    public void setUp() {
+       stack = new Stack();
+    }
+
     @Test(expected = EmptyStackException.class)
     public void throw_an_exception_if_popped_when_empty() {
-        Stack stack = new Stack();
         stack.pop();
     }
 
     @Test
     public void push_element_to_top_of_stack() {
-        Stack stack = new Stack();
         stack.push(SOME_OBJECT);
         assertThat(stack.getPushed(), is(SOME_OBJECT));
         stack.push(ANOTHER_OBJECT);
@@ -30,7 +35,6 @@ public class StackShould {
 
     @Test
     public void pop_the_last_element_pushed() {
-        Stack stack = new Stack();
         stack.push(SOME_OBJECT);
         stack.pop();
         assertThat(stack.getPopped(), is(SOME_OBJECT));
