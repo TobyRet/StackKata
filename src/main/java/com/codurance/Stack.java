@@ -5,14 +5,15 @@ import java.util.EmptyStackException;
 
 public class Stack {
 
-    public ArrayList array = new ArrayList();
-    public Object popped;
+    private ArrayList array = new ArrayList();
+    private Object popped = new Object();
 
     public void pop() {
-        if(array.size() == 0) {
+        if (array.size() == 0) {
             throw new EmptyStackException();
         } else {
-            popped = array.remove(array.size()-1);
+            popped = array.get(array.size() - 1);
+            array.remove(popped);
         }
     }
 
@@ -21,10 +22,14 @@ public class Stack {
     }
 
     public Object getPushed() {
-        return array.get(array.size()-1);
+        return array.get(array.size() - 1);
     }
 
     public Object getPopped() {
         return popped;
+    }
+
+    public ArrayList getArray(){
+        return array;
     }
 }
